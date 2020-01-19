@@ -23,7 +23,7 @@ namespace DOTNET_CQRS.Domain.Customer.Handler
         }
         public async Task<string> Handle(CustomerCreateCommand request, CancellationToken cancellationToken)
         {
-            var customer = new CustomerEntity(request.Id, request.FirstName, request.LastName, request.Email, request.Phone);
+            var customer = new CustomerEntity(request.FirstName, request.LastName, request.Email, request.Phone);
             await _repository.Save(customer);
 
             await _mediator.Publish(new CustomerActionNotification{
@@ -38,7 +38,7 @@ namespace DOTNET_CQRS.Domain.Customer.Handler
 
         public async Task<string> Handle(CustomerUpdateCommand request, CancellationToken cancellationToken)
         {
-            var customer = new CustomerEntity(request.Id, request.FirstName, request.LastName, request.Email, request.Phone);
+            var customer = new CustomerEntity(request.FirstName, request.LastName, request.Email, request.Phone);
             await _repository.Update(request.Id, customer);
 
             await _mediator.Publish(new CustomerActionNotification{

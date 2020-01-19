@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace DOTNET_CQRS
 {
@@ -35,6 +36,14 @@ namespace DOTNET_CQRS
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title  = "Api Modelo", Version = "v1"});
             });
+
+            services.Configure<MongoCustomerDatabase>(
+                Configuration.GetSection(nameof(MongoCustomerDatabase))
+            );
+
+            services.AddSingleton<IMongoCustomerDatabase>(sp => 
+                sp.GetRequiredService<IOptions<MongoCustomerDatabase>>().Value
+            );
             
         }
 

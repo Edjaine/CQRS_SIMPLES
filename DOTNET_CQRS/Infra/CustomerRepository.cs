@@ -2,52 +2,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DOTNET_CQRS.Domain.Customer.Entity;
+using MongoDB.Driver;
 
 namespace DOTNET_CQRS.Infra
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public List<CustomerEntity> Customers {get;}
-
-        public CustomerRepository()
+        private readonly IMongoCollection<CustomerEntity> _customerDatabase; 
+        public CustomerRepository(IMongoCustomerDatabase settings)
         {
-            Customers = new List<CustomerEntity>();
-            Customers.Add(new CustomerEntity
-                (1,
-                "Edjaine",
-                "Oliveira",
-                "c83edsoliveira@hotmail.com",
-                "11985544957"));
-
+          var client = new MongoClient(settings.ConnectionString);
+          var database = client.GetDatabase(settings.DatabaseName);
+          _customerDatabase = database.GetCollection<CustomerEntity>(
+              settings.CQRSCollectionName
+          );
         }
-
         public async Task Save(CustomerEntity customer)
         {
-            await Task.Run(() => Customers.Add(customer));
+            await Task.Run(() => _customerDatabase.InsertOne(customer));
         }
-        public async Task Delete(int id)
-        {
-            var index = Customers.FindIndex(m=> m.Id == id);
-            await Task.Run(() => Customers.RemoveAt(id));
+        public async Task Delete(string id)
+        {            
+            await Task.Run(() => _customerDatabase.DeleteOne(c => c.Id == id));
         }
-
         public async Task<IEnumerable<CustomerEntity>> GetAll()
         {
-            return await Task.FromResult(Customers.ToList());
+            return await Task.FromResult(_customerDatabase.Find(Customer => true).ToList());
         }
-
-        public async Task<CustomerEntity> GetById(int id)
+        public async Task<CustomerEntity> GetById(string id)
         {
-            var result = Customers.Where(p=> p.Id == id).FirstOrDefault();
+            var result = _customerDatabase.Find(c => c.Id == id).FirstOrDefault();
             return await Task.FromResult(result);
         }
-
-
-        public async Task Update(int id, CustomerEntity customer)
-        {
-            var index = Customers.FindIndex(m => m.Id == id);
-            if(index >= 0)
-                await Task.Run(() => Customers.RemoveAt(index));
+        public async Task Update(string id, CustomerEntity customer)
+        {           
+            await Task.Run(() => _customerDatabase.ReplaceOne(c => c.Id == id, customer));
         }
     }
 }

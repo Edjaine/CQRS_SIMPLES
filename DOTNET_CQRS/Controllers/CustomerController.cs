@@ -34,7 +34,7 @@ namespace DOTNET_CQRS.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(int id){
+        public async Task<IActionResult> Delete(string id){
             var command = new CustomerDeleteCommand{Id = id};
             var response = await _mediator.Send(command);
             return Ok(response);            
@@ -48,7 +48,7 @@ namespace DOTNET_CQRS.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id){
+        public async Task<IActionResult> Get(string id){
             var result = await _repository.GetById(id);
             return Ok(result);
         }

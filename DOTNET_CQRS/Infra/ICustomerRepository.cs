@@ -7,9 +7,9 @@ namespace DOTNET_CQRS.Infra
     public interface ICustomerRepository
     {
         Task Save(CustomerEntity customer) ;
-        Task Update(int id, CustomerEntity customer);
-        Task Delete(int id);
-        Task<CustomerEntity> GetById(int id);
+        Task Update(string id, CustomerEntity customer);
+        Task Delete(string id);
+        Task<CustomerEntity> GetById(string id);
         Task<IEnumerable<CustomerEntity>> GetAll();
          
     }
