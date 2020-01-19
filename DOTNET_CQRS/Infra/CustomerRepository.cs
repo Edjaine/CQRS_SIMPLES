@@ -8,6 +8,19 @@ namespace DOTNET_CQRS.Infra
     public class CustomerRepository : ICustomerRepository
     {
         public List<CustomerEntity> Customers {get;}
+
+        public CustomerRepository()
+        {
+            Customers = new List<CustomerEntity>();
+            Customers.Add(new CustomerEntity
+                (1,
+                "Edjaine",
+                "Oliveira",
+                "c83edsoliveira@hotmail.com",
+                "11985544957"));
+
+        }
+
         public async Task Save(CustomerEntity customer)
         {
             await Task.Run(() => Customers.Add(customer));
@@ -20,7 +33,7 @@ namespace DOTNET_CQRS.Infra
 
         public async Task<IEnumerable<CustomerEntity>> GetAll()
         {
-            return await Task.FromResult(Customers);
+            return await Task.FromResult(Customers.ToList());
         }
 
         public async Task<CustomerEntity> GetById(int id)

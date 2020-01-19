@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DOTNET_CQRS.Domain.Customer.Command;
 using DOTNET_CQRS.Infra;
@@ -40,13 +41,13 @@ namespace DOTNET_CQRS.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             var result = await _repository.GetAll();
             return Ok(result);
         }
-        [HttpGet("{id}")]
 
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id){
             var result = await _repository.GetById(id);
             return Ok(result);
