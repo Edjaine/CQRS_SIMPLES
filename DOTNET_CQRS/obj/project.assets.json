@@ -6446,24 +6446,30 @@
     ]
   },
   "packageFolders": {
-    "/home/edjaine/.nuget/packages/": {}
+    "C:\\Users\\fs1344\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/edjaine/Documents/FONTES/DOT_NET_CQRS/DOTNET_CQRS/DOTNET_CQRS.csproj",
+      "projectUniqueName": "C:\\Users\\fs1344\\Documents\\FONTES\\EXEMPLO_CQRS\\CQRS_SIMPLES\\DOTNET_CQRS\\DOTNET_CQRS.csproj",
       "projectName": "DOTNET_CQRS",
-      "projectPath": "/home/edjaine/Documents/FONTES/DOT_NET_CQRS/DOTNET_CQRS/DOTNET_CQRS.csproj",
-      "packagesPath": "/home/edjaine/.nuget/packages/",
-      "outputPath": "/home/edjaine/Documents/FONTES/DOT_NET_CQRS/DOTNET_CQRS/obj/",
+      "projectPath": "C:\\Users\\fs1344\\Documents\\FONTES\\EXEMPLO_CQRS\\CQRS_SIMPLES\\DOTNET_CQRS\\DOTNET_CQRS.csproj",
+      "packagesPath": "C:\\Users\\fs1344\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fs1344\\Documents\\FONTES\\EXEMPLO_CQRS\\CQRS_SIMPLES\\DOTNET_CQRS\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/home/edjaine/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\fs1344\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6515,7 +6521,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
