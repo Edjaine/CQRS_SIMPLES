@@ -7,6 +7,7 @@ using cqrssample.Core;
 using cqrssample.Domain.Customer.Command;
 using cqrssample.Domain.Customer.Entity;
 using cqrssample.Infra;
+using cqrssample.Model;
 using cqrssample.Service;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -56,9 +57,9 @@ namespace cqrssample.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter)
+        public async Task<IActionResult> GetAll([FromQuery] CustomerModel filter)
         {
-            var result = await _repository.GetAll(filter.PageNumber, filter.PageSize);
+            var result = await _repository.GetAll(filter.PageNumber, filter.PageSize, x => x.FirstName.Contains(filter.Name));
             return Ok(PagiantionHelper.CreatePagedReponse<CustomerEntity>(result, filter, result.Count(), (ServiceUri)_serviceUri, Request.Path.Value));
         }
 
